@@ -1,17 +1,16 @@
 {
   "name": "peteigscrape",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r esm index.js"
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3",
-    "got": "^9.6.0",
-    "esm": "^3.2.25"
+    "got": "^9.6.0"
   }
 }

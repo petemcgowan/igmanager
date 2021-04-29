@@ -1,7 +1,9 @@
-import { getFollowersFollowingsDiffs } from "./lib/scraper";
-import { makePostLikersFile } from "./lib/scraper";
-const { getPosts } = require("./posts_graphql");
-import { getPostLikes } from "./likes";
+import {
+  getFollowersFollowingsDiffs,
+  makePostLikersFile,
+} from "./lib/scraper.js";
+import { getPosts } from "./server/posts_graphql.js";
+import { getPostLikes } from "./server/likes.js";
 import axios from "axios";
 
 async function getPostLikesMain() {
@@ -34,5 +36,6 @@ async function followersFollowings() {
   const jsonData = await getFollowersFollowingsDiffs();
 }
 
+// Main entry point to the application
 getPostLikesMain();
 //followersFollowings();
