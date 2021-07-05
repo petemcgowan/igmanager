@@ -5,7 +5,7 @@ import { igconfig } from "../config/igconfig.js";
 
 import { URLSearchParams } from "url";
 
-const grapqlEndpoint = "https://www.instagram.com/graphql/query/";
+const graphQLEndpoint = "https://www.instagram.com/graphql/query/";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -13,15 +13,16 @@ function sleep(ms) {
 
 async function getGotParams() {
   const cookieString = igconfig.cookieString;
+  const userAgent = igconfig.userAgent;
 
   return {
     headers: {
       authority: "www.instagram.com",
       "cache-control": "max-age=0",
       "upgrade-insecure-requests": "1",
-      // 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36',
-      "user-agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
+      "user-agent": userAgent,
+      // user agent differ, but this is an example:
+      //   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
       accept:
         "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
       "sec-fetch-site": "cross-site",
@@ -107,10 +108,12 @@ function randomIntFromInterval(min, max) {
 
 async function query(gotParams, searchParams, nodeTransformationFunc) {
   try {
-    console.log("Sleeping for 2-5 seconds...");
-    await sleep(randomIntFromInterval(2300, 6300));
+    console.log("Sleeping for 3-8 seconds...");
+    console.log("Sleep test value:" + randomIntFromInterval(3400, 8500));
+
+    await sleep(randomIntFromInterval(3400, 8500));
     const { body } = await got(
-      `${grapqlEndpoint}?${searchParams.toString()}`,
+      `${graphQLEndpoint}?${searchParams.toString()}`,
       gotParams
     );
     if (!body.data) throw new Error(`GraphQL query does not contain data`);
@@ -122,7 +125,7 @@ async function query(gotParams, searchParams, nodeTransformationFunc) {
   ////////////////////////////////////////////////
   // let jsonResponse = await axios({
   //     method: 'GET',
-  //     url: `${grapqlEndpoint}?${searchParams.toString()}`,
+  //     url: `${graphQLEndpoint}?${searchParams.toString()}`,
   //     // url: urlPart,
   //     headers: headerParam
   // })
