@@ -1,5 +1,6 @@
 import { finiteQuery } from "./helpers.js";
 import { QUERY_IDS } from "../data/query_ids.js";
+import { igconfig_variables } from "../config/igconfig_variables.js";
 
 const { profileFollowersQueryId } = QUERY_IDS;
 
@@ -40,10 +41,11 @@ export async function getProfileFollowedBy(limit) {
 
   // Pete Todo remove this hardcoding
   const variables = {
-    id: 5525087531, // my user id not sure if this is number or string
+    id: igconfig_variables.followedById,
     include_reel: false,
     fetch_mutual: false,
   };
+
   console.log("calling finiteQuery");
   return finiteQuery(
     profileFollowersQueryId,

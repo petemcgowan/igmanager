@@ -1,6 +1,6 @@
 import { finiteQuery } from "./helpers.js";
 import { QUERY_IDS } from "../data/query_ids.js";
-import { igconfig } from "../config/igconfig.js";
+import { igconfig_variables } from "../config/igconfig_variables.js";
 
 const { profilePostsQueryId } = QUERY_IDS;
 
@@ -27,12 +27,15 @@ export async function getPosts(/*page, input, */ limit) {
 
   let queryId = profilePostsQueryId;
 
-  if (!igconfig.instagramId || igconfig.instagramId == undefined)
+  if (
+    !igconfig_variables.instagramId ||
+    igconfig_variables.instagramId == undefined
+  )
     throw new Error(
       "Instagram Id is not initialized, fill in the necessary config value"
     );
 
-  let query = { id: igconfig.instagramId };
+  let query = { id: igconfig_variables.instagramId };
   console.log("query:" + JSON.stringify(query));
 
   return finiteQuery(queryId, query, nodeTransformationFunction, limit);

@@ -1,5 +1,6 @@
 import { finiteQuery } from "./helpers.js";
 import { QUERY_IDS } from "../data/query_ids.js";
+import { igconfig_variables } from "../config/igconfig_variables.js";
 
 const { profileFollowingQueryId } = QUERY_IDS;
 
@@ -35,7 +36,7 @@ export async function getProfileFollowing(limit) {
   };
 
   const variables = {
-    id: 5525087531, // my user id not sure if this is number or string
+    id: igconfig_variables.followingId,
     include_reel: false,
     fetch_mutual: false,
   };
